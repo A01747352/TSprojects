@@ -1,0 +1,8 @@
+# Instalación de typescript
+npm install -g typescript
+# Creación del proyecto typescript
+mkdir project
+cd project
+npm init -y
+tsc --init
+code
