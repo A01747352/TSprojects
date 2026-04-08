@@ -1,21 +1,28 @@
 import { Router } from 'express';
 
 export default abstract class AbstractController {
-    // Atributos
-	private _router: Router;
-	private _prefix: string;
-    // Getters
+    private _router: Router;
+    private _prefix: string;
+
+    protected constructor(prefix: string) {
+        this._router = Router();
+        this._prefix = prefix;
+        this.initRoutes();
+    }
     public get router(): Router {
         return this._router;
     }
     public get prefix(): string {
         return this._prefix;
     }
-    // Constructor
-	protected constructor(_prefix: string) {
-		this._prefix = _prefix;
-		this._router = Router();
-	}
-    // Métodos
-	protected abstract initRoutes(): void;
+ 
+    protected abstract initRoutes(): void;
+
+    public getRouter(): Router {
+        return this._router;
+    }
+
+    public getPrefix(): string {
+        return this._prefix;
+    }
 }
