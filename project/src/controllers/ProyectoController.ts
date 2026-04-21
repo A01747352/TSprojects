@@ -1,27 +1,31 @@
-import {Request, Response} from 'express';
-import AbstractController from './AbstractController';
+import { Request,Response } from "express";
+import AbstractController from "./AbstractController";
+import db from "../models";
 
-export default class ProyectoController extends AbstractController {
+export default class ProyectoController extends AbstractController{
     //Singleton
-    //Atributos
-    private static _instance: ProyectoController;
-    //Metodos de clase
-    public static get instance(): ProyectoController {
-        return this._instance || (this._instance = new this("Proyecto"));
+    //Atributos de clase
+    private static _instance:ProyectoController;
+    //Métodos de clase
+    public static get instance():ProyectoController{
+        return this._instance || 
+        (this._instance = new this("Proyecto"));
     }
-    //Metodos de instancia
+    //Metodo de instancia
     protected initRoutes(): void {
-        this.router.get('/listarProyectos', this.getListarProyectos.bind(this));
-        this.router.post('/crearProyecto', this.postCrearProyecto.bind(this));
+        this.router.get('/listarProyectos',
+            this.getListarProyectos.bind(this));
+        this.router.post('crearProyecto',
+            this.postCrearProyecto.bind(this));    
     }
 
-    private async getListarProyectos(req: Request, res: Response): Promise <void> {
+    private async getListarProyectos(req:Request,res:Response):Promise<void>{
         console.log("Acceso a la ruta /listarProyectos");
-        res.status(200).json({mensaje: 'Ruta consumida'});
+        res.status(200).json({mensaje:'Ruta consumida'});
+    }
+    private async postCrearProyecto(req:Request,res:Response):Promise<void>{
+        console.log("Acceso a la ruta /crearProyecto");
+        res.status(200).json({mensaje:'Ruta consumida'});
     }
 
-    private async postCrearProyecto(req: Request, res: Response): Promise <void> {
-        console.log("Acceso a la ruta /crearProyecto");
-        res.status(200).json({mensaje: 'Ruta consumida'});
-    }
 }
